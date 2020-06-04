@@ -2,17 +2,22 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.16",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   }
 }
