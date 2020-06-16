@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.HomePage {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  font-family: cursive;
+}
+
+.Browsing {
+  margin-top: 60px;
+}
+
+.StartLinks {
+  margin-top: 60px;
+}
+
+.HomeButton{
+  margin-top: 40px;
+}
