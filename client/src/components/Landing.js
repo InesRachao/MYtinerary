@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 export default class Landing extends Component {
     render() {
@@ -8,7 +9,9 @@ export default class Landing extends Component {
             <div className = "Browsing">
                 <p>Find your perfect trip, designed by insiders who know and love their cities</p>
                 <h2>Start browsing</h2>
-                <input type="image" src="/images/circled-right-2.png" width="100" height="100" />
+            </div>
+            <div class ="container">
+                <Link to = "/Cities"><img src="/images/circled-right-2.png" width="100" height="100"/></Link> 
             </div>
             <div className = "StartLinks">
                 <p>Want to build your own MYtinerary?</p>

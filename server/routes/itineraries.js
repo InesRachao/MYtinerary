@@ -48,6 +48,8 @@ router.post("/:id", async (req, res) => {
         city_id: req.params.id
         })
 
+        console.log(`add itinerary ${itinerary}`)
+
         await itinerary.save()
         res.send(itinerary)
 
