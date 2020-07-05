@@ -47,6 +47,7 @@ router.post("/add", async (req, res) => {
 
         await city.save()
         return res.json(city)
+        
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server error");

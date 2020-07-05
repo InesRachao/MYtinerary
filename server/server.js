@@ -17,6 +17,7 @@ app.use("/activities", require("./routes/activities"))
 app.use("/users", require("./routes/users"))
 
 
+
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => console.log(`server started at port ${PORT}`))

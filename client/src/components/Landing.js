@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
+
 export default class Landing extends Component {
     render() {
         return (
@@ -19,7 +20,7 @@ export default class Landing extends Component {
                 <span>Create Account</span>
             </div>
             <div className = "HomeButton">
-                <input type="image" src="/images/homeIcon.png" width="50" height="50" />
+                <input type="image" src="/images/homeIcon.png" alt="homeIcon" width="50" height="50" />
             </div>
         </div>
         )
