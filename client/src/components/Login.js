@@ -26,9 +26,10 @@ class Login extends Component {
         e.preventDefault()
         const email = this.state.email
         const password = this.state.password
+        const body = JSON.stringify({email, password})
         
         
-        this.props.login(email, password)
+        this.props.login(body)
     }
    
       

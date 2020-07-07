@@ -25,8 +25,9 @@ import { addUser } from "../store/actions/createaccountActions";
          const email = this.state.email
          const password = this.state.password
          const profile_img = this.state.profile_img
+         const body = JSON.stringify({name, email, password, profile_img})
          
-         this.props.addUser(name, email, password, profile_img)
+         this.props.addUser(body)
      }
     
        

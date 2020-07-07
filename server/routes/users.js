@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 
 router.post("/register", async (req, res) => {
+    console.log(req.body)
 
     const {
         name,
@@ -34,6 +35,7 @@ router.post("/register", async (req, res) => {
     }
 
 }) 
+
 
 router.post("/login", async (req, res) => {
 

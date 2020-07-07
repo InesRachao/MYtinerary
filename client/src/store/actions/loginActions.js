@@ -1,21 +1,26 @@
-import axios from "axios"
+import axios from "axios";
+import { LOGIN_SUCCESS } from "../actions/types";
 
-export const login = (email, password) => dispatch => {
 
-    const body = { email: email, password: password }
-    fetch("http://localhost:5000/users/login",{
-        method: "POST",
-        headers: {"Content-type": "Application/JSON"},
-        body
-    })
+export const login = (body) => async dispatch => {
 
-    .then(response =>  response.json())
-    .then(res => {
-        console.log(res)
-    
-    })
-    .catch(err => console.log(err));
-    /* const res = await axios.post("http://locahost:5000/users/login", body, config)
-    .then (res => console.log(res.data))
-    .catch(err => console.log(err)) */
+console.log(body)
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+
+    try {
+      const res = await axios.post("http://localhost:5000/users/login", body, config)
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+      console.log(res.data)
+
+    } catch (error) {
+      console.log(error.message)
+    }
 }
