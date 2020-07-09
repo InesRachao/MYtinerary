@@ -2,6 +2,7 @@ const express = require("express");
 const conectDB = require("./config/db");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const app = express()
 
@@ -15,6 +16,10 @@ app.use("/cities", require("./routes/cities"))
 app.use("/itineraries", require("./routes/itineraries"))
 app.use("/activities", require("./routes/activities"))
 app.use("/users", require("./routes/users"))
+
+app.use(passport.initialize());
+require("./config/passport")
+
 
 
 

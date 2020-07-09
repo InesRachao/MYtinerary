@@ -30,6 +30,7 @@ class Login extends Component {
         
         
         this.props.login(body)
+        this.props.history.push("/cities")
     }
    
       

@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../store/reducers/rootReducer';
 import logger from "redux-logger";
+import { loadUser } from './actions/loginActions';
 
 const initialState = {};
 
@@ -15,5 +16,9 @@ const store = createStore(
     initialState, 
     reduxDevTools(middleware)
 );
+if (localStorage.token) {
+    store.dispatch(loadUser())
+}
+
 
 export default store;

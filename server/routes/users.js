@@ -4,6 +4,7 @@ const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const key = require("../config/keys");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 
 router.post("/register", async (req, res) => {
@@ -37,6 +38,7 @@ router.post("/register", async (req, res) => {
 }) 
 
 
+
 router.post("/login", async (req, res) => {
 
     const {
@@ -44,6 +46,8 @@ router.post("/login", async (req, res) => {
         password
 
     } = req.body
+
+    console.log(req.body)
 
     try {
         let loginUser = await userModel.findOne({email: req.body.email})
@@ -88,5 +92,22 @@ router.post("/login", async (req, res) => {
         process.exit(1)
     }
 })
+
+
+
+
+router.get(
+    "/",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+    userModel
+    .findOne({ _id: req.user.id })
+    .then(user => {
+    res.json(user);
+    })
+    .catch(err => res.status(404).json({ error: "User does not exist" }));
+    }
+   );
+
 
 module.exports = router
