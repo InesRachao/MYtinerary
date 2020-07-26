@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {fetchItineraries} from "../store/actions/itineraryActions";
 import Activities from "./Activities";
 import { Button, Card, Row, Col, Accordion} from 'react-bootstrap';
+import { fetchFavourites} from "../store/actions/userActions";
+import { BsFillHeartFill } from 'react-icons/bs';
+import { addFavourites} from "../store/actions/userActions";
+import { removeFavourites} from "../store/actions/userActions";
 
 
 class Itineraries extends Component {
@@ -11,16 +15,55 @@ class Itineraries extends Component {
     constructor(props){
         super(props)
         this.state = {
+            addedfav: [],
             myItineraryId: "",        
         }
     }
 
+
     componentDidMount(){
-        
-       this.props.fetchItineraries(this.props.location.state.myCity._id)
+        const id = this.props.location.state.myCity._id
+
+            this.props.fetchItineraries(id)
+       //this.props.fetchItineraries(this.props.location.state.myCity._id)
 
     }
 
+
+    componentWillMount(){
+        if(localStorage.token){
+
+            this.props.fetchFavourites()
+        }
+    }
+
+
+    handleClick = (id) =>{
+        if(!localStorage.token){
+            alert("You must be logged in to add a favourite")
+
+            this.props.history.push("/login")
+
+        } else {
+            let fav = this.props.favourites.filter(favourite =>
+                favourite.itineraryID === id);
+            console.log(fav);
+
+            if(fav.length === 0){
+                this.props.addFavourites(id)
+                
+            } else {
+                this.props.removeFavourites(id)
+    
+                let myIndex = this.state.addedfav.indexOf(id)
+                this.state.addedfav.splice(myIndex, 1)
+                
+            }
+        }
+               
+    }
+
+        
 
     getActivities = (id) => {
         this.setState({myItineraryId: id})
@@ -54,7 +97,68 @@ class Itineraries extends Component {
             borderColor: "navy",
 
         } 
+
+
+        if(this.props.favourites !== undefined){
+
+            this.props.favourites.map(fav => {
+                if(!this.state.addedfav.includes(fav.itineraryID)){
+                    this.state.addedfav.push(fav.itineraryID)
+                }
+            })
+        }
+
+        let itn = this.props.itineraries.map(itinerary => {
+            let button;
+
+            if(this.state.addedfav.includes(itinerary._id)){
+                button = (
+                    <div type="button" onClick={() => this.handleClick(itinerary._id)}><BsFillHeartFill color = "red"/></div>
+                )
+            } else {
+                button = (
+                    <div type="button" onClick={() => this.handleClick(itinerary._id)}><BsFillHeartFill color = "grey"/></div>
+                )
+                
+            }
+        
  
+            return (
+                <div>
+                
+                    {/* {this.props.itineraries.map(itinerary => { 
+                        return ( */}
+                        <div key = {itinerary._id} style = {itineraryCardStyle}> 
+                            <Card className = "card-body">
+                                <Row>
+                                    <Col xs="6">
+                                        <img src = {itinerary.img} width = "40" height = "40" />
+                                        <Link to href="#">User</Link>
+                                    </Col>
+                                    <Col xs="6">    
+                                        <h3>{itinerary.title}</h3>
+                                        <p>Likes: {itinerary.rating} || Duration: {itinerary.duration} || Price: {itinerary.price}</p>
+                                        <p>#</p>
+                                        <p>{button}</p>
+                                    </Col> 
+                                </Row>
+                                <Accordion defaultActiveKey="0">
+                                    <Card>
+                                        <Card.Header>
+                                        <Accordion.Toggle as={Button} onClick = {() => this.getActivities(itinerary._id)} variant="link" eventKey="1">
+                                            View all Activities!
+                                        </Accordion.Toggle>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="1">
+                                        <Card.Body>{this.state.myItineraryId === itinerary._id && <Activities myId = {itinerary._id}/>}</Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </Card>
+                        </div>
+                </div>
+            )
+        })
         return (
             <div>
                 <div style = {cardStyle}>
@@ -62,69 +166,23 @@ class Itineraries extends Component {
                 </div>
 
                 <h1>Itineraries</h1>
-                
-                {this.props.itineraries.map(itinerary => { 
-                    return (
-                    <div key = {itinerary._id} style = {itineraryCardStyle}>
-                        <Card className = "card-body">
-                            <Row>
-                                <Col xs="6">
-                                    <img src = {itinerary.img} width = "40" height = "40" />
-                                    <Link to href="#">Username</Link>
-                                </Col>
-                                <Col xs="6">    
-                                    <h3>{itinerary.title}</h3>
-                                    <p>Likes: {itinerary.rating} || Duration: {itinerary.duration} || Price: {itinerary.price}</p>
-                                    <p>#</p>
-                                </Col>
-                            </Row>
-                            <Accordion defaultActiveKey="0">
-                                <Card>
-                                    <Card.Header>
-                                    <Accordion.Toggle as={Button} onClick = {() => this.getActivities(itinerary._id)} variant="link" eventKey="1">
-                                        View all Activities!
-                                    </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="1">
-                                    <Card.Body>{this.state.myItineraryId === itinerary._id && <Activities myId = {itinerary._id}/>}</Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                            </Accordion>
-                        </Card>
-                        {/* <div key = {itinerary._id}>
-                            <h2>{itinerary.title}</h2>
-                            <img src = {itinerary.img} width = "40" height = "40"></img>
-                            <p>Likes:{itinerary.rating}</p>
-                            <p>{itinerary.duration}</p>
-                            <p>{itinerary.price}</p>
-                            <Activities/>
-                        </div> */}
-                    </div>
-                    )
-
-                })}
+                {itn}
+                <Link to= {{pathname: "cities"}}>Choose another city</Link>
             </div>
         )
     }
 }
 
 const MapStateToProps = state => ({
-    itineraries: state.itineraries.itineraries
+    itineraries: state.itineraries.itineraries,
+    favourites: state.userfavs.favouritesItn
 })
 
-export default connect(MapStateToProps, {fetchItineraries})(Itineraries)
+export default connect(MapStateToProps, { fetchItineraries , addFavourites ,  fetchFavourites, removeFavourites })(Itineraries)
 
 
-/* export default class Itineraries extends Component {
-    render() {
-        return (
-            <div>
-               <h1>Itineraries</h1> 
-               <Link to= {{pathname: "cities"}}>Cities</Link>
-            </div>
-        )
-    }
-} */
+
+
 
 
 

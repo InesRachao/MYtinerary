@@ -7,21 +7,38 @@ const user = new mongoose.Schema({
         required: true
 
     },
+
+    userGoogle: {
+        type: Boolean,
+    },
+
     password:{
         type: String,
-        required: true
+        required: function validate() {
+            if (this.userGoogle) {
+                return false
+            } else {
+                return true
+            }
+        }
 
     },
+
     email: {
         type: String,
         required: true,
         unique: true
 
     },
+
     profile_img: {
         type: String,
         required: true
 
+    },
+
+    favourites: {
+        type: Array,
     }
 
 })

@@ -7,6 +7,8 @@ const passport = require("passport");
 const app = express()
 
 conectDB()
+app.use(passport.initialize());
+require("./config/passport")
 app.use(express.json({extended: false}))
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors())
@@ -16,9 +18,6 @@ app.use("/cities", require("./routes/cities"))
 app.use("/itineraries", require("./routes/itineraries"))
 app.use("/activities", require("./routes/activities"))
 app.use("/users", require("./routes/users"))
-
-app.use(passport.initialize());
-require("./config/passport")
 
 
 

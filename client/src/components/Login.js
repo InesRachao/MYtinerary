@@ -51,6 +51,10 @@ class Login extends Component {
                  Submit
                </Button>
            </Form>
+            <div style={{marginTop:"20px"}}>
+              <a className= "google-btn" href="http://localhost:5000/users/google">Login with Google</a>
+            </div>
+
            </div>
        )
    }

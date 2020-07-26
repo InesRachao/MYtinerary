@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Navbar, Nav,Image, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import {logout} from "../store/actions/loginActions"
+import { connect } from 'react-redux';
 
 
 class Navigation extends Component {
@@ -13,6 +15,9 @@ class Navigation extends Component {
         </Tooltip>;  
     }
     
+    handleLogout = () =>{
+        this.props.logout()
+    }
     
     render() {
         const Example = (props) => ( 
@@ -32,9 +37,8 @@ class Navigation extends Component {
         return (
             <div>
                 <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="#home">   
-                        <Example/>
-                    </Navbar.Brand>
+                      
+                    <Example/>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
@@ -42,6 +46,7 @@ class Navigation extends Component {
                             <Nav.Link href="cities">Cities</Nav.Link>
                             <Nav.Link href="login">Login</Nav.Link>
                             <Nav.Link href="createaccount">Create Account</Nav.Link>
+                            <Nav.Link onClick={this.handleLogout} href="/">Logout</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -49,7 +54,7 @@ class Navigation extends Component {
         )
     }
 }
-export default Navigation
+export default connect(null, {logout})(Navigation) 
 
 
 

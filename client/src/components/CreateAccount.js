@@ -1,7 +1,7 @@
 import React, { Component,useState } from 'react'
 import {connect}    from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-import { addUser } from "../store/actions/createaccountActions";
+import { addUser } from "../store/actions/userActions";
 
  class CreateAccount extends Component {
      constructor(props){

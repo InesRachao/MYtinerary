@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import Navigation from "./Navigation";
 
 
 export default class Landing extends Component {
     render() {
         return (
+        
         <div className = "HomePage">
+            <Navigation/>
             <img src = "/images/MYtineraryLogo.png" alt = "Logo" width="250" height="100"></img>
             <div className = "Browsing">
                 <p>Find your perfect trip, designed by insiders who know and love their cities</p>

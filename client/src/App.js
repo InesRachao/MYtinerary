@@ -16,7 +16,6 @@ export default class App extends Component {
     return (
       <Provider store = {store}>
       <div className ="App">
-        <Navigation/>
         <BrowserRouter>
           <Switch>
             <Route exact path= "/" component={Landing}/>

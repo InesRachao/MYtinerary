@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {Navbar, Form, FormControl} from "react-bootstrap";
 import {connect} from "react-redux";
 import {fetchCities} from "../store/actions/cityActions";
+import {authGoogle} from "../store/actions/loginActions";
 
 
 
@@ -17,7 +18,12 @@ class Cities extends Component {
     }
 
     componentDidMount(){
+        const url = this.props.location.search
         this.props.fetchCities()
+        if (url !== "") {
+           const token = url.split("=")[1]
+            this.props.authGoogle(token)
+        } 
     }
 
     handleChange = (e) => {
@@ -25,8 +31,10 @@ class Cities extends Component {
         filtered: e.target.value
        });
     } 
+    
 
     render() {
+        console.log(this.props.location.search)
         const searchParam = this.state.filtered.toLowerCase()
 
         const citiesPost = this.props.cities.filter(city => {return city.name.toLowerCase().startsWith(searchParam)}).map(city => {
@@ -91,4 +99,4 @@ const MapStateToProps = state => ({
     cities: state.cities.cities
 })
 
-export default connect(MapStateToProps, {fetchCities})(Cities)
+export default connect(MapStateToProps, {fetchCities, authGoogle})(Cities)
