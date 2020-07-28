@@ -8,7 +8,8 @@ import { fetchFavourites} from "../store/actions/userActions";
 import { BsFillHeartFill } from 'react-icons/bs';
 import { addFavourites} from "../store/actions/userActions";
 import { removeFavourites} from "../store/actions/userActions";
-
+import Navigation from "./Navigation";
+import {fetchComments} from "../store/actions/commentActions";
 
 class Itineraries extends Component {
 
@@ -25,7 +26,8 @@ class Itineraries extends Component {
         const id = this.props.location.state.myCity._id
 
             this.props.fetchItineraries(id)
-       //this.props.fetchItineraries(this.props.location.state.myCity._id)
+       
+            this.props.fetchComments("5ee91bf3260f3413fc8f4d12")
 
     }
 
@@ -71,7 +73,7 @@ class Itineraries extends Component {
 
 
     render() {
-        console.log(this.state.myItineraryId)
+        console.log(this.props)
         const cardStyle ={
             color: "white",
             backgroundText: "white",
@@ -125,9 +127,6 @@ class Itineraries extends Component {
  
             return (
                 <div>
-                
-                    {/* {this.props.itineraries.map(itinerary => { 
-                        return ( */}
                         <div key = {itinerary._id} style = {itineraryCardStyle}> 
                             <Card className = "card-body">
                                 <Row>
@@ -161,6 +160,7 @@ class Itineraries extends Component {
         })
         return (
             <div>
+                <Navigation/>
                 <div style = {cardStyle}>
                     <h1>{this.props.location.state.myCity.name}</h1>
                 </div>
@@ -175,10 +175,11 @@ class Itineraries extends Component {
 
 const MapStateToProps = state => ({
     itineraries: state.itineraries.itineraries,
-    favourites: state.userfavs.favouritesItn
+    favourites: state.userfavs.favouritesItn,
+    comments: state.comments.comments,
 })
 
-export default connect(MapStateToProps, { fetchItineraries , addFavourites ,  fetchFavourites, removeFavourites })(Itineraries)
+export default connect(MapStateToProps, { fetchItineraries , addFavourites,  fetchFavourites, removeFavourites, fetchComments })(Itineraries)
 
 
 

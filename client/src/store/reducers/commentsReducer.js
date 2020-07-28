@@ -1,20 +1,19 @@
-import { FETCH_ITINERARIES } from '../actions/types';
-
+import {FETCH_COMMENTS} from "../actions/types";
 
 const initialState = {
-    itineraries: [],
-    itinerary: {}
+    comments: [],
+    comment: {},
 }
 
 export default function(state = initialState, action){
    
     switch(action.type){
         
-        case FETCH_ITINERARIES:
+        case FETCH_COMMENTS:
             
             return {
                 ...state, 
-                itineraries: action.payload
+                comments: action.payload
             }
             
         default:

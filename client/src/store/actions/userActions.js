@@ -79,7 +79,7 @@ export const removeFavourites = id => dispatch => {
             });
             })
             .catch(err => console.log(err));
-        };
+};
 
 
 

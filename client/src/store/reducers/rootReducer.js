@@ -4,6 +4,7 @@ import citiesReducer from "./citiesReducer";
 import itinerariesReducer from "./itinerariesReducer";
 import loginReducer from "./loginReducer";
 import userReducer from "./userReducer";
+import commentsReducer from "./commentsReducer";
 
 
 
@@ -12,7 +13,9 @@ const rootReducer = combineReducers({
     itineraries: itinerariesReducer, 
     activities: activitiesReducer,
     auth: loginReducer,
-    userfavs: userReducer });
+    userfavs: userReducer,
+    comments: commentsReducer,
+ });
 
 
 

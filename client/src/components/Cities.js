@@ -4,6 +4,7 @@ import {Navbar, Form, FormControl} from "react-bootstrap";
 import {connect} from "react-redux";
 import {fetchCities} from "../store/actions/cityActions";
 import {authGoogle} from "../store/actions/loginActions";
+import Navigation from "./Navigation";
 
 
 
@@ -63,7 +64,8 @@ class Cities extends Component {
         })
             return (
             <div>
-                <Navbar bg="light" variant="light">
+                <Navigation/>
+                {/* <Navbar bg="light" variant="light">
                     <div className= "navBar">
                         <Navbar.Brand href="#menuIcon">
                             <img
@@ -86,7 +88,7 @@ class Cities extends Component {
                             />{' '}  
                         </Navbar.Brand>
                     </div> 
-                </Navbar>
+                </Navbar> */}
                 <p className= "filterParagraph">Search our current cities</p>
                 <Form inline>
                     <FormControl id = "mySearch" type="text" placeholder="Search" className="mr-sm-2" onChange = {this.handleChange}/>
