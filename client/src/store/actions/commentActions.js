@@ -3,6 +3,7 @@ import {FETCH_COMMENTS, COMMENT_SUCCESS, COMMENT_DELETE, COMMENT_UPDATE} from ".
 
 export const fetchComments = (id) => dispatch =>{
     
+    
     fetch(`http://localhost:5000/comments/${id}`)
     .then(res => res.json())
     .then ( comments => 
@@ -15,11 +16,12 @@ export const fetchComments = (id) => dispatch =>{
 }
 
 
-export const addComments = id => dispatch => {
+export const addComments = (id, body) => dispatch => {
     
          fetch("http://localhost:5000/comments/addComments/"+id, {
             method: "POST",
             headers: {"Content-type": "Application/JSON", "Authorization": `bearer ${localStorage.token}`},
+            body
           
           })
           .then(response => response.json())
@@ -36,8 +38,9 @@ export const addComments = id => dispatch => {
 
 
 export const deleteComments = id => dispatch => {
+    console.log(id)
 
-        fetch("http://localhost:5000/comments/deleteComments/"+id, {
+        fetch("http://localhost:5000/comments/deleteComment/"+id, {
         method: "DELETE",
         headers: {"Content-type": "Application/JSON", "Authorization": `bearer ${localStorage.token}`},
         

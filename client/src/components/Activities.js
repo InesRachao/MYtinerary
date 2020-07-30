@@ -6,10 +6,10 @@ import { Carousel } from "react-bootstrap";
 
 class Activities extends Component {
 
-componentDidMount(){
-    this.props.fetchActivities(this.props.myId)
-    
-}
+    componentDidMount(){
+        this.props.fetchActivities(this.props.myId)
+        
+    }
 
 
     render() {

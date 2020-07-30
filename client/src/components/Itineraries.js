@@ -10,6 +10,7 @@ import { addFavourites} from "../store/actions/userActions";
 import { removeFavourites} from "../store/actions/userActions";
 import Navigation from "./Navigation";
 import {fetchComments} from "../store/actions/commentActions";
+import Comments from "./Comments";
 
 class Itineraries extends Component {
 
@@ -145,11 +146,11 @@ class Itineraries extends Component {
                                     <Card>
                                         <Card.Header>
                                         <Accordion.Toggle as={Button} onClick = {() => this.getActivities(itinerary._id)} variant="link" eventKey="1">
-                                            View all Activities!
+                                            View activities and more!
                                         </Accordion.Toggle>
                                         </Card.Header>
                                         <Accordion.Collapse eventKey="1">
-                                        <Card.Body>{this.state.myItineraryId === itinerary._id && <Activities myId = {itinerary._id}/>}</Card.Body>
+            <Card.Body>{this.state.myItineraryId === itinerary._id && <Activities myId = {itinerary._id}/>} {this.state.myItineraryId === itinerary._id && <Comments myId = {itinerary._id}/>}</Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
                                 </Accordion>
