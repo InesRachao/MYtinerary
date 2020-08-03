@@ -42,69 +42,66 @@ class Comments extends Component {
 
 
 
+    render () {
+        console.log(this.props)
 
-render () {
-    console.log(this.props)
+        const commentboxStyle ={
+            display: "flex",
+            flexWrap: "wrap",
+            margin: "10px",
+            borderStyle: "solid",
+            borderWidth: "thin",
+            borderColor: "grey",
+            justifyContent: "space-evenly",
 
-    let comment = this.props.comments.map(comments => {
-        
+        }
+
+        let comment = this.props.comments.map(comments => {
+            
+
+            return (
+                <div style = {commentboxStyle}>
+                    <Media>
+                        <img
+                        width={64}
+                        height={64}
+                        className="align-self-start mr-3"
+                        src={comments.profile_img}
+                        alt=""
+                        />
+                        <Media.Body>
+                        <h4>{comments.userName}</h4>
+                        <p>{comments.text}</p>
+                        <i>{comments.date}</i>
+                        <div type="button" onClick={() => this.props.deleteComments(comments._id)}><BsFillTrashFill color = "black"/></div>
+                        </Media.Body>
+                    </Media>
+                </div>
+                
+            )
+        })
 
         return (
-            
-            
-            <div className="list-unstyled">
-                <Media as="li">
-                    <img 
-                    src = {comments.profile_img}
-                    width={64}
-                    height={64}
-                    className="mr-3"
-                    src="holder.js/64x64"
-                    alt="d"
-                    />
-                    <Media.Body>
-                        <h5>{comments.userName}</h5>
-                        <p>
-                            {comments.text}
-                        </p>
-                        <p>
-                            {comments.date}
-                        </p>
-                        <div type="button" onClick={() => this.props.deleteComments(comments._id)}><BsFillTrashFill color = "black"/></div> 
-                    </Media.Body>
-                </Media>  
-            </div>
-            
-        )
-    })
+            <div>
+                <Form onSubmit={this.submitComments}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label style={{marginBottom: 0}}>Write a Comment</Form.Label>
+                        <Form.Control type="text" as="textarea" rows="2" onChange={this.handleChange}/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" style={{height:22, paddingTop:0}}>
+                    Submit
+                    </Button>
+                    
+                </Form>    
 
-    return (
-        <div>
-            <Form onSubmit={this.submitComments}>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label style={{marginBottom: 0}}>Write a Comment</Form.Label>
-                    <Form.Control type="text" as="textarea" rows="2" onChange={this.handleChange}/>
-                </Form.Group>
-            <Button variant="primary" type="submit" style={{height:22, paddingTop:0}}>
-              Submit
-            </Button>
-                
-          </Form>    
-
-          <div>
-                <Media>
+                <div>
+                   
                     {comment}
-                </Media>
-            </div>           
-        </div>
-            
-        
-        
-    )
-    
-    
-    
-}
+                  
+                </div>
+            </div>
+        )
+    }
 
 }
 

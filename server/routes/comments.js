@@ -93,7 +93,7 @@ router.delete(
             res.status(404).json({ error: "User does not exist" })
         }
 
-
+        console.log("user ze "+user)
         let comment = await commentsModel.findById({_id: req.params.id})
         console.log(comment)
 
