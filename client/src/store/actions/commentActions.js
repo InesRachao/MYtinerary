@@ -58,11 +58,13 @@ export const deleteComments = id => dispatch => {
 
 
 
-export const updatedComments = id => dispatch => {
+export const updatedComments = (id, body) => dispatch => {
+    console.log(id)
 
     fetch("http://localhost:5000/comments/updatedComments/"+id, {
     method: "PUT",
     headers: {"Content-type": "Application/JSON", "Authorization": `bearer ${localStorage.token}`},
+    body
     
     })
     .then(response => response.json())

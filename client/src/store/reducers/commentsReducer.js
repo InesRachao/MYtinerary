@@ -1,4 +1,4 @@
-import {FETCH_COMMENTS} from "../actions/types";
+import {FETCH_COMMENTS, COMMENT_SUCCESS, COMMENT_DELETE, COMMENT_UPDATE} from "../actions/types";
 
 const initialState = {
     comments: [],
@@ -14,6 +14,30 @@ export default function(state = initialState, action){
             return {
                 ...state, 
                 comments: action.payload
+            }
+        
+        case COMMENT_SUCCESS:
+
+            return {
+                ...state,
+                comment: action.payload
+                
+                
+            }
+        
+        case COMMENT_DELETE:
+
+            return {
+                ...state,
+                comment: action.payload
+               
+            }
+
+        case COMMENT_UPDATE:
+
+            return{
+                ...state,
+                comment: action.payload
             }
             
         default:
