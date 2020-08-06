@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 
 
 router.put(
-    "/updateComment/:id",
+    "/updatedComment/:id",
 
     passport.authenticate("jwt", {session: false}),
     

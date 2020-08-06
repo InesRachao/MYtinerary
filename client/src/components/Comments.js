@@ -48,19 +48,21 @@ class Comments extends Component {
         e.preventDefault()
         const text = this.state.text
         const body = JSON.stringify({text})
-        window.location.reload(true)
 
         this.props.addComments(this.props.myId, body)
+        //window.location.reload(true)
+
     }  
 
 
     updateComments = (id) => {
         const text = this.state.text
         const body = JSON.stringify({text})
-        window.location.reload(true) 
-        console.log("test update")
+
+        console.log(id)
 
         this.props.updatedComments(id, body)
+        //window.location.reload(true) 
         
     }
 
@@ -84,6 +86,7 @@ class Comments extends Component {
 
         
         let comment = this.props.comments.map(comments => {
+            console.log(comments._id)
     
 
             return (
@@ -107,7 +110,7 @@ class Comments extends Component {
                             <div>
                                 <Button variant="primary" onClick={this.toggle}><BsPencil color = "black"/></Button>
          
-                                <Modal show={this.state.modal} onHide={this.toggle}>
+                                <Modal id = {comments._id} show={this.state.modal} onHide={this.toggle}>
                                 <Modal.Header closeButton></Modal.Header>
                                 <Modal.Body>
                                     <Form >
